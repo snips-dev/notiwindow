@@ -1,4 +1,3 @@
-import { events } from './events'
 
 let count = 0
 
@@ -6,10 +5,18 @@ const generateId = () => {
   return count++
 }
 
+const emitClose = (id) => {
+  const event = new CustomEvent('close', id);
+  window.dispatchEvent(event);
+}
+
 export const notify = (notification, timeout) => {
   notification.id = generateId()
   notification.group = notification.group || ''
-  events.emit('notify', { notification, timeout })
+  const event = new CustomEvent('notify',  { detail : { notification, timeout }});
+  window.dispatchEvent(event);
 
-  return () => events.emit('close', notification.id)
+  return () => emitClose({detail : notification.id});
 }
+
+

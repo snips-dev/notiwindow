@@ -1,9 +1,5 @@
 import { h, TransitionGroup } from 'vue';
 
-function mitt(n){return {all:n=n||new Map,on:function(t,e){var i=n.get(t);i?i.push(e):n.set(t,[e]);},off:function(t,e){var i=n.get(t);i&&(e?i.splice(i.indexOf(e)>>>0,1):n.set(t,[]));},emit:function(t,e){var i=n.get(t);i&&i.slice().map(function(n){n(e);}),(i=n.get("*"))&&i.slice().map(function(n){n(t,e);});}}}
-
-const events = mitt();
-
 var script$1 = {
   inject: {
     context: { default: { group: '', position: 'top' } },
@@ -70,11 +66,12 @@ var script$1 = {
     },
   },
   mounted() {
-    events.on('notify', this.add);
-    events.on('close', this.remove);
+    window.addEventListener('notify', this.add);
+    window.addEventListener('close', this.remove);
   },
   methods: {
-    add({ notification, timeout}) {
+    add(evt) {
+      const { notification, timeout } = evt.detail;
       const DEFAULT_TIMEOUT = 3000;
 
       this.notifications.push(notification);
@@ -83,7 +80,8 @@ var script$1 = {
         this.remove(notification.id);
       }, timeout || DEFAULT_TIMEOUT);
     },
-    close(id) {
+    close(evt) {
+      const id = evt.detail;
       this.$emit('close');
       this.remove(id);
     },
@@ -156,12 +154,18 @@ const generateId = () => {
   return count++
 };
 
+const emitClose = (id) => {
+  const event = new CustomEvent('close', id);
+  window.dispatchEvent(event);
+};
+
 const notify = (notification, timeout) => {
   notification.id = generateId();
   notification.group = notification.group || '';
-  events.emit('notify', { notification, timeout });
+  const event = new CustomEvent('notify',  { detail : { notification, timeout }});
+  window.dispatchEvent(event);
 
-  return () => events.emit('close', notification.id)
+  return () => emitClose({detail : notification.id});
 };
 
 /* eslint-disable vue/component-definition-name-casing */

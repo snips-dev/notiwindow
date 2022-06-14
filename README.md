@@ -1,47 +1,35 @@
 
-# Notiwind
+# notiwindow
 
-<a href="https://www.npmjs.com/package/notiwind">
-  <img src="https://img.shields.io/npm/v/notiwind.svg?color=41b883" alt="Npm Version">
-</a>
-<a href="https://bundlephobia.com/package/notiwind">
-  <img src="https://img.shields.io/bundlephobia/minzip/notiwind" alt="Size">
-</a>
-<a href="https://github.com/emmanuelsw/notiwind/blob/master/LICENSE">
-  <img src="https://img.shields.io/badge/license-MIT-428F7E.svg" alt="License">
-</a>
 
-A headless Vue 3 notification library to use with Tailwind CSS.
+A headless Vue 3 notification library to use with Tailwind CSS.But with custom event
 This is a fork and port of [vue3-vt-notifications](https://github.com/killmenot/vue3-vt-notifications) created and modified by [killmenot](https://github.com/killmenot) to support Vue 3. Initially created by [sansil](https://github.com/sansil).
 
 ## 🌟 Features
 
 - 100% Customizable
 - Composition API support
+- Custom Event Bus
 - Create different groups of notifications
 - Tailwind's JIT support
-
-## 🤖 Demo
-
-[Live Preview](https://notiwind-demo.netlify.app)
 
 ## ⚡️ Installation
 
 ```bash
-yarn add notiwind
+yarn add notiwindow
 ```
 
 or
 
 ```bash
-npm i notiwind
+npm i notiwindow
 ```
 
 You can then register `Notifications` as a Vue plugin:
 
 ```js
 import { createApp } from 'vue'
-import Notifications from 'notiwind'
+import Notifications from 'notiwindow'
 import App from './App.vue'
 
 createApp(App)
@@ -79,7 +67,7 @@ this.$notify({
 ###### Composition API
 
 ```javascript
-import { notify } from "notiwind"
+import { notify } from "notiwindow"
 
 notify({
   group: "foo",

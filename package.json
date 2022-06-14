@@ -1,21 +1,18 @@
 {
-  "name": "notiwind",
-  "description": "A headless Vue 3 notification library to use with Tailwind CSS.",
-  "version": "1.2.6",
+  "name": "notiwindow",
+  "description": "A headless Vue 3 notification library to use with Tailwind CSS. But with window events",
+  "version": "1.0.1",
   "main": "dist/index.common.js",
   "module": "dist/index.esm.js",
   "license": "MIT",
   "author": {
-    "name": "Emmanuel Deossa",
-    "url": "https://github.com/emmanuelsw"
+    "name": "Paolo Ferracchiati",
+    "url": "https://github.com/snips-dev"
   },
-  "homepage": "https://github.com/emmanuelsw/notiwind",
+  "homepage": "https://github.com/snips-dev/notiwindowow",
   "repository": {
     "type": "git",
-    "url": "git@github.com:emmanuelsw/notiwind.git"
-  },
-  "bugs": {
-    "url": "https://github.com/emmanuelsw/notiwind/issues"
+    "url": "git@github.com:snips-dev/notiwindowow.git"
   },
   "scripts": {
     "build": "rm -rf dist/ && rollup -c",

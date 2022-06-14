@@ -1,6 +1,5 @@
 <script>
 import { TransitionGroup, h } from 'vue'
-import { events } from './events'
 
 export default {
   inject: {
@@ -68,11 +67,12 @@ export default {
     },
   },
   mounted() {
-    events.on('notify', this.add)
-    events.on('close', this.remove)
+    window.addEventListener('notify', this.add)
+    window.addEventListener('close', this.remove)
   },
   methods: {
-    add({ notification, timeout}) {
+    add(evt) {
+      const { notification, timeout } = evt.detail
       const DEFAULT_TIMEOUT = 3000
 
       this.notifications.push(notification)
@@ -81,7 +81,8 @@ export default {
         this.remove(notification.id)
       }, timeout || DEFAULT_TIMEOUT)
     },
-    close(id) {
+    close(evt) {
+      const id = evt.detail
       this.$emit('close')
       this.remove(id)
     },
